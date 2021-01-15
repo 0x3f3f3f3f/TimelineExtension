@@ -12,24 +12,21 @@ namespace UnityEngine.Timeline
     /// <para><see cref="ActivationPlayableAsset"/>,<seealso cref="AnimationPlayableAsset"/></para>
     /// </summary>
     [DisplayName("分析Clip")]
-    public class AnalysePlayableAsset : PlayableAsset,ITimelineClipAsset
+    public class AnalysePlayableAsset : PlayableAsset, ITimelineClipAsset
     {
-        public string UUID;
-        public bool LogCreatePlayable;
+        public AnalysePlayableBehaviour template = new AnalysePlayableBehaviour();
         public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
         {
-            if (LogCreatePlayable)
+            if (template.LogCreatePlayable)
             {
-                Debug.Log($"触发 <color=#00ff00>{nameof(AnalysePlayableAsset)}.{nameof(CreatePlayable)}</color> UUID:{UUID}\n" +
+                Debug.Log($"触发 <color=#00ff00>{nameof(AnalysePlayableAsset)}.{nameof(CreatePlayable)}</color> UUID:{template.UUID}\n" +
                 $"graph:{JsonUtility.ToJson(graph)} \n" +
                 $"owner:{owner.name}");
             }
-            
-            var res = Playable.Create(graph);
+
+            var res = ScriptPlayable<AnalysePlayableBehaviour>.Create(graph, template);
             return res;
         }
-
-        public override double duration => 2f;
 
         public ClipCaps clipCaps => ClipCaps.All;
     }

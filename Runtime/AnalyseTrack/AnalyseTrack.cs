@@ -40,6 +40,10 @@ namespace UnityEngine.Timeline
             }
 
             base.OnCreateClip(clip);
+            if (clip.asset is AnalysePlayableAsset asset)
+            {
+                clip.displayName = "分析Clip：  " + asset.template.UUID.Substring(0, 8);
+            }
         }
 
         public bool LogCreateTrackMixer;
@@ -51,12 +55,13 @@ namespace UnityEngine.Timeline
                 Debug.Log($"触发 <color=#0000ff>{nameof(AnalyseTrack)}.{nameof(CreateTrackMixer)}</color> \n" +
                 $"graph:{JsonUtility.ToJson(graph)}  owner:{go.name} inputCount:{inputCount}");
             }
-            var handle = ScriptPlayable<AnalyseMixer>.Create(graph,inputCount);
+            var handle = ScriptPlayable<AnalyseMixer>.Create(graph, MixerLogSetting, inputCount);
             handle.GetBehaviour().Track = this;
             return handle;
         }
 
         public bool LogOnAfterTrackDeserialize;
+
         protected override void OnAfterTrackDeserialize()
         {
             if (LogOnAfterTrackDeserialize)
@@ -65,14 +70,9 @@ namespace UnityEngine.Timeline
             }
             base.OnAfterTrackDeserialize();
         }
-    }
 
-    partial class AnalyseTrack
-    {
-        [Space(20)]
         [Header("Mixer混合器Log设置")]
-        public bool LogMixerPrepareFrame;
-        public bool LogMixerProcessFrame;
+        public AnalyseMixer MixerLogSetting = new AnalyseMixer();
     }
 }
 
