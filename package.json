@@ -1,0 +1,11 @@
+{
+  "name": "com.kumokyaku.timelineextension",
+  "displayName": "TimelineExtension",
+  "version": "0.0.1",
+  "unity": "2019.4",
+  "description": "Wizard Fast Created.",
+  "hideInEditor": false,
+  "dependencies": {
+    "com.unity.timeline": "1.4.5"
+  }
+}
