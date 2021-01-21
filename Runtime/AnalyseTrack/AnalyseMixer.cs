@@ -36,7 +36,7 @@ namespace UnityEngine.Timeline
                 $"graph:{JsonUtility.ToJson(playable)}");
             }
             base.OnGraphStart(playable);
-        }   
+        }
 
         public override void OnPlayableCreate(Playable playable)
         {
@@ -45,7 +45,7 @@ namespace UnityEngine.Timeline
                 Debug.Log($"Mixer 触发 {nameof(AnalyseMixer)}.{nameof(OnPlayableCreate)}。\n" +
                 $"graph:{JsonUtility.ToJson(playable)}");
             }
-            
+
             base.OnPlayableCreate(playable);
         }
 
@@ -56,7 +56,7 @@ namespace UnityEngine.Timeline
                 Debug.Log($"Mixer 触发 {nameof(AnalyseMixer)}.{nameof(OnGraphStop)}。\n" +
                 $"graph:{JsonUtility.ToJson(playable)}");
             }
-            
+
             base.OnGraphStop(playable);
         }
 
@@ -67,7 +67,7 @@ namespace UnityEngine.Timeline
                 Debug.Log($"Mixer 触发 {nameof(AnalyseMixer)}.{nameof(OnPlayableDestroy)}。\n" +
                 $"graph:{JsonUtility.ToJson(playable)}");
             }
-            
+
             base.OnPlayableDestroy(playable);
         }
 
@@ -91,7 +91,7 @@ namespace UnityEngine.Timeline
                 $"graph:{JsonUtility.ToJson(playable)} \n" +
                 $"info:{JsonUtility.ToJson(info)} \n");
             }
-            
+
             base.OnBehaviourPause(playable, info);
         }
 
@@ -103,7 +103,7 @@ namespace UnityEngine.Timeline
                 $"graph:{JsonUtility.ToJson(playable)} \n" +
                 $"info:{JsonUtility.ToJson(info)} \n");
             }
-            
+
             base.PrepareData(playable, info);
         }
 
@@ -122,7 +122,7 @@ namespace UnityEngine.Timeline
             {
                 Debug.Log($"frameId {info.frameId} evaluationType {info.evaluationType}" +
                     $" deltaTime {info.deltaTime}  {info} " +
-                    $" playable {playable.GetTime()} frame {(int)(playable.GetTime() * 60)}");
+                    $"  playable {playable.GetTime()} frame {(int)(playable.GetTime() * 60)}");
             }
             base.PrepareFrame(playable, info);
         }
@@ -139,6 +139,6 @@ namespace UnityEngine.Timeline
             base.ProcessFrame(playable, info, playerData);
         }
 
-        
+
     }
 }

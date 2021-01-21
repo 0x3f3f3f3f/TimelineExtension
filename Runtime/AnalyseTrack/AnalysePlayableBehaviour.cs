@@ -26,7 +26,7 @@ namespace UnityEngine.Timeline
                 Debug.Log($"ClipBehaviour 触发 {nameof(AnalysePlayableBehaviour)}.{nameof(OnBehaviourPause)}。\n" +
                 $"UUID:{UUID}");
             }
-            
+
             base.OnBehaviourPause(playable, info);
         }
 
