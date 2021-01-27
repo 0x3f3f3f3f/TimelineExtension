@@ -18,6 +18,7 @@ namespace UnityEngine.Timeline
         public bool LogClipOnBehaviourPause = true;
         public bool LogClipOnBehaviourPlay = true;
         public bool LogClipOnGraphStart = false;
+        public bool LogClipDetail = false;
 
         public override void OnBehaviourPause(Playable playable, FrameData info)
         {
@@ -37,6 +38,12 @@ namespace UnityEngine.Timeline
                 Debug.Log($"ClipBehaviour 触发 {nameof(AnalysePlayableBehaviour)}.{nameof(OnBehaviourPlay)}。\n" +
                 $"UUID:{UUID}");
             }
+
+            if (LogClipDetail)
+            {
+                Debug.Log($"Clip Duration: {playable.GetDuration()}");
+            }
+
             base.OnBehaviourPlay(playable, info);
         }
 
