@@ -19,8 +19,8 @@ namespace UnityEngine.Timeline
     {
         public AnalyseTrack Track { get; internal set; }
 
-        public Color ClassColor = new Color(0.82f, 0.58f, 0.23f, 1);
-        public Color FuncColor = new Color(0.82f, 0.58f, 0.23f, 1);
+        public Color ClassColor = new Color(0.02f, 0.58f, 0.30f, 1);
+        public Color FuncColor = new Color(0.70f, 0.42f, 0.01f, 1);
         public bool LogMixerOnGraphStart = true;
         public bool LogMixerOnPlayableCreate = true;
         public bool LogMixerOnGraphStop = true;
