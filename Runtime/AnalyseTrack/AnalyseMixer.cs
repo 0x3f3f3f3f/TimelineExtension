@@ -31,16 +31,11 @@ namespace UnityEngine.Timeline
         public bool LogMixerPrepareFrame = false;
         public bool LogMixerProcessFrame = false;
 
-        internal static string Html(string orignal, in Color color)
-        {
-            return $"<color=#{ColorUtility.ToHtmlStringRGBA(color)}>{orignal}</color>";
-        }
-
-        string ClassName => Html(nameof(AnalyseMixer), ClassColor);
+        string ClassName => nameof(AnalyseMixer).Html(ClassColor);
 
         string FuncName([CallerMemberName] string funcName = "")
         {
-            return Html(funcName, FuncColor);
+            return funcName.Html(FuncColor);
         }
 
         public override void OnGraphStart(Playable playable)

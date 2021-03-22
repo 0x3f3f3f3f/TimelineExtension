@@ -75,5 +75,13 @@ namespace UnityEngine.Timeline
         [Header("Mixer混合器Log设置")]
         public AnalyseMixer MixerLogSetting = new AnalyseMixer();
     }
+
+    internal static class Ex
+    {
+        public static string Html(this string orignal, in Color color)
+        {
+            return $"<color=#{ColorUtility.ToHtmlStringRGBA(color)}>{orignal}</color>";
+        }
+    }
 }
 

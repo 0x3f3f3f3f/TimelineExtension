@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
@@ -19,7 +20,7 @@ namespace UnityEngine.Timeline
         {
             if (template.LogCreatePlayable)
             {
-                Debug.Log($"触发 <color=#00ff00>{nameof(AnalysePlayableAsset)}.{nameof(CreatePlayable)}</color> UUID:{template.UUID}\n" +
+                Debug.Log($"触发 {ClassName}.{FuncName()} UUID:{template.UUID}\n" +
                 $"graph:{JsonUtility.ToJson(graph)} \n" +
                 $"owner:{owner.name}");
             }
@@ -29,5 +30,12 @@ namespace UnityEngine.Timeline
         }
 
         public ClipCaps clipCaps => ClipCaps.All;
+
+        string ClassName => nameof(AnalysePlayableAsset).Html(template.Color);
+
+        string FuncName([CallerMemberName] string funcName = "")
+        {
+            return funcName.Html(template.Color);
+        }
     }
 }

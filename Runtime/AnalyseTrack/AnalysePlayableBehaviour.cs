@@ -14,6 +14,7 @@ namespace UnityEngine.Timeline
     public class AnalysePlayableBehaviour : PlayableBehaviour
     {
         public string UUID = Guid.NewGuid().ToString();
+        public Color Color = new Color(0.02f, 0.58f, 0.30f, 1);
         public bool LogCreatePlayable = true;
         public bool LogClipOnBehaviourPause = true;
         public bool LogClipOnBehaviourPlay = true;
