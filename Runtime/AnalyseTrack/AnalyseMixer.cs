@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -18,6 +19,8 @@ namespace UnityEngine.Timeline
     {
         public AnalyseTrack Track { get; internal set; }
 
+        public Color ClassColor = new Color(0.82f, 0.58f, 0.23f, 1);
+        public Color FuncColor = new Color(0.82f, 0.58f, 0.23f,1);
         public bool LogMixerOnGraphStart = true;
         public bool LogMixerOnPlayableCreate = true;
         public bool LogMixerOnGraphStop = true;
@@ -28,11 +31,23 @@ namespace UnityEngine.Timeline
         public bool LogMixerPrepareFrame = false;
         public bool LogMixerProcessFrame = false;
 
+        internal static string Html(string orignal, in Color color)
+        {
+            return $"<color=#{ColorUtility.ToHtmlStringRGBA(color)}>{orignal}</color>";
+        }
+
+        string ClassName => Html(nameof(AnalyseMixer), ClassColor);
+
+        string FuncName([CallerMemberName] string funcName = "")
+        {
+            return Html(funcName, FuncColor);
+        }
+
         public override void OnGraphStart(Playable playable)
         {
             if (LogMixerOnGraphStart)
             {
-                Debug.Log($"Mixer 触发 {nameof(AnalyseMixer)}.{nameof(OnGraphStart)}。\n" +
+                Debug.Log($"Mixer 触发 {ClassName}.{FuncName()}。\n" +
                 $"graph:{JsonUtility.ToJson(playable)}");
             }
             base.OnGraphStart(playable);
@@ -42,7 +57,7 @@ namespace UnityEngine.Timeline
         {
             if (LogMixerOnPlayableCreate)
             {
-                Debug.Log($"Mixer 触发 {nameof(AnalyseMixer)}.{nameof(OnPlayableCreate)}。\n" +
+                Debug.Log($"Mixer 触发 {ClassName}.{nameof(OnPlayableCreate)}。\n" +
                 $"graph:{JsonUtility.ToJson(playable)}");
             }
 
@@ -53,7 +68,7 @@ namespace UnityEngine.Timeline
         {
             if (LogMixerOnGraphStop)
             {
-                Debug.Log($"Mixer 触发 {nameof(AnalyseMixer)}.{nameof(OnGraphStop)}。\n" +
+                Debug.Log($"Mixer 触发 {ClassName}.{nameof(OnGraphStop)}。\n" +
                 $"graph:{JsonUtility.ToJson(playable)}");
             }
 
@@ -64,7 +79,7 @@ namespace UnityEngine.Timeline
         {
             if (LogMixerOnPlayableDestroy)
             {
-                Debug.Log($"Mixer 触发 {nameof(AnalyseMixer)}.{nameof(OnPlayableDestroy)}。\n" +
+                Debug.Log($"Mixer 触发 {ClassName}.{nameof(OnPlayableDestroy)}。\n" +
                 $"graph:{JsonUtility.ToJson(playable)}");
             }
 
@@ -75,7 +90,7 @@ namespace UnityEngine.Timeline
         {
             if (LogMixerOnBehaviourPlay)
             {
-                Debug.Log($"Mixer 触发 {nameof(AnalyseMixer)}.{nameof(OnBehaviourPlay)}。\n" +
+                Debug.Log($"Mixer 触发 {ClassName}.{nameof(OnBehaviourPlay)}。\n" +
                 $"graph:{JsonUtility.ToJson(playable)} \n" +
                 $"info:{JsonUtility.ToJson(info)} \n");
             }
@@ -87,7 +102,7 @@ namespace UnityEngine.Timeline
         {
             if (LogMixerOnBehaviourPause)
             {
-                Debug.Log($"Mixer 触发 {nameof(AnalyseMixer)}.{nameof(OnBehaviourPause)}。\n" +
+                Debug.Log($"Mixer 触发 {ClassName}.{nameof(OnBehaviourPause)}。\n" +
                 $"graph:{JsonUtility.ToJson(playable)} \n" +
                 $"info:{JsonUtility.ToJson(info)} \n");
             }
@@ -99,7 +114,7 @@ namespace UnityEngine.Timeline
         {
             if (LogMixerPrepareData)
             {
-                Debug.Log($"Mixer 触发 {nameof(AnalyseMixer)}.{nameof(PrepareData)}。\n" +
+                Debug.Log($"Mixer 触发 {ClassName}.{nameof(PrepareData)}。\n" +
                 $"graph:{JsonUtility.ToJson(playable)} \n" +
                 $"info:{JsonUtility.ToJson(info)} \n");
             }
@@ -113,7 +128,7 @@ namespace UnityEngine.Timeline
         {
             if (LogMixerPrepareFrame)
             {
-                Debug.Log($"Mixer 触发 {nameof(AnalyseMixer)}.{nameof(PrepareFrame)}。\n" +
+                Debug.Log($"Mixer 触发 {ClassName}.{nameof(PrepareFrame)}。\n" +
                     $"graph:{JsonUtility.ToJson(playable)} \n" +
                     $"info:{JsonUtility.ToJson(info)} \n");
             }
@@ -131,7 +146,7 @@ namespace UnityEngine.Timeline
         {
             if (LogMixerProcessFrame)
             {
-                Debug.Log($"Mixer 触发 {nameof(AnalyseMixer)}.{nameof(ProcessFrame)}。\n" +
+                Debug.Log($"Mixer 触发 {ClassName}.{nameof(ProcessFrame)}。\n" +
                     $"graph:{JsonUtility.ToJson(playable)} \n" +
                     $"info:{JsonUtility.ToJson(info)} \n" +
                     $"object:{JsonUtility.ToJson(playerData)}");

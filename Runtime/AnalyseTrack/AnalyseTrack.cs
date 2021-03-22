@@ -12,6 +12,7 @@ namespace UnityEngine.Timeline
     /// 可播轨道官方通常以Track后缀
     /// <para><see cref="ActivationTrack"/>,<seealso cref="AnimationTrack"/></para>
     /// </summary>
+    [TrackColor(0.82f, 0.58f, 0.23f)]
     [DisplayName("分析轨道")]//轨道名字不起作用
     [TrackClipType(typeof(AnalysePlayableAsset))]
     public partial class AnalyseTrack : PlayableTrack
