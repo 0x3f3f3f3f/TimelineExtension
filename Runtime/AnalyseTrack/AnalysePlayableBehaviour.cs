@@ -40,11 +40,6 @@ namespace UnityEngine.Timeline
                 $"UUID:{UUID}");
             }
 
-            if (LogClipDetail)
-            {
-                Debug.Log($"Clip Duration: {playable.GetDuration()}");
-            }
-
             base.OnBehaviourPlay(playable, info);
         }
 
@@ -60,6 +55,12 @@ namespace UnityEngine.Timeline
 
         public override void ProcessFrame(Playable playable, FrameData info, object playerData)
         {
+            if (LogClipDetail)
+            {
+                Debug.Log($"Clip ProcessFrame Duration: {playable.GetDuration()} \n frameId {info.frameId} evaluationType {info.evaluationType}" +
+                    $" deltaTime {info.deltaTime}  {info} " +
+                    $"  playable {playable.GetTime()} frame {(int)(playable.GetTime() * 60)}");
+            }
             base.ProcessFrame(playable, info, playerData);
         }
     }
